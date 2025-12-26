@@ -1,0 +1,154 @@
+=== Shrnutí ===
+
+CleverMiner task processing summary:
+
+Task type : 4ftMiner
+Number of verifications : 125195
+Number of rules : 6
+Total time needed : 00h 00m 05s
+Time of data preparation : 00h 00m 00s
+Time of rule mining : 00h 00m 05s
+
+
+=== Seznam pravidel (seřazeno podle BASE) ===
+RULEID  BASE   CONF   AAD     Rule
+5       673    0.221  0.408++  Age_Group(Middle-Age) & Payroll_Flag(0) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+6       658    0.220  0.402++  Age_Group(Middle-Age Senior) & Children_Num(0 1 2) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+3       619    0.223  0.420++  Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+4       560    0.231  0.471++  Age_Group(Middle-Age) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+1       539    0.220  0.404++  Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Business_Flag(0) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+2       513    0.232  0.481++  Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1) => Insurance_Products_Flag(1) | ---
+
+=== Jednotlivá pravidla (seřazeno podle BASE) ===
+
+=== Rule 5 (BASE=673) ===
+
+
+
+Rule id : 5
+
+Base :   673  Relative base : 0.067  CONF : 0.221  AAD : +0.408  BAD : -0.408
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Payroll_Flag(0) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  673| 2374|
+----|-----|-----|
+¬A  |  896| 6057|
+----|-----|-----|
+
+
+=== Rule 6 (BASE=658) ===
+
+
+
+Rule id : 6
+
+Base :   658  Relative base : 0.066  CONF : 0.220  AAD : +0.402  BAD : -0.402
+
+Cedents:
+  antecedent : Age_Group(Middle-Age Senior) & Children_Num(0 1 2) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  658| 2333|
+----|-----|-----|
+¬A  |  911| 6098|
+----|-----|-----|
+
+
+=== Rule 3 (BASE=619) ===
+
+
+
+Rule id : 3
+
+Base :   619  Relative base : 0.062  CONF : 0.223  AAD : +0.420  BAD : -0.420
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  619| 2160|
+----|-----|-----|
+¬A  |  950| 6271|
+----|-----|-----|
+
+
+=== Rule 4 (BASE=560) ===
+
+
+
+Rule id : 4
+
+Base :   560  Relative base : 0.056  CONF : 0.231  AAD : +0.471  BAD : -0.471
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  560| 1866|
+----|-----|-----|
+¬A  | 1009| 6565|
+----|-----|-----|
+
+
+=== Rule 1 (BASE=539) ===
+
+
+
+Rule id : 1
+
+Base :   539  Relative base : 0.054  CONF : 0.220  AAD : +0.404  BAD : -0.404
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Business_Flag(0) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  539| 1908|
+----|-----|-----|
+¬A  | 1030| 6523|
+----|-----|-----|
+
+
+=== Rule 2 (BASE=513) ===
+
+
+
+Rule id : 2
+
+Base :   513  Relative base : 0.051  CONF : 0.232  AAD : +0.481  BAD : -0.481
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Children_Num(0 1 2) & Payroll_Flag(0) & Saving_Current_Accounts_Flag(1) & Credit_Cards_Flag(1)
+  succcedent : Insurance_Products_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  513| 1694|
+----|-----|-----|
+¬A  | 1056| 6737|
+----|-----|-----|
+

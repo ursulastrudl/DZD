@@ -1,0 +1,315 @@
+=== Shrnutí ===
+
+CleverMiner task processing summary:
+
+Task type : 4ftMiner
+Number of verifications : 643
+Number of rules : 13
+Total time needed : 00h 00m 00s
+Time of data preparation : 00h 00m 00s
+Time of rule mining : 00h 00m 00s
+
+
+=== Seznam pravidel (seřazeno podle BASE) ===
+RULEID  BASE   CONF   AAD     Rule
+1       1103   0.703  0.559++  Insurance_Products_Flag(1) => Consumer_Loans_Flag(1) | ---
+3       857    0.711  0.577++  Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) => Consumer_Loans_Flag(1) | ---
+13      832    0.718  0.592++  Insurance_Products_Flag(1) & Children_Num(0 1) => Consumer_Loans_Flag(1) | ---
+8       789    0.728  0.614++  Insurance_Products_Flag(1) & Income_Group(Low Income Medium Income) => Consumer_Loans_Flag(1) | ---
+2       679    0.710  0.574++  Insurance_Products_Flag(1) & Age_Group(Middle-Age) => Consumer_Loans_Flag(1) | ---
+11      663    0.678  0.503++  Insurance_Products_Flag(1) & Marital_Status(Married) => Consumer_Loans_Flag(1) | ---
+12      638    0.742  0.645++  Insurance_Products_Flag(1) & Children_Num(0) => Consumer_Loans_Flag(1) | ---
+6       615    0.731  0.622++  Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Children_Num(0 1) => Consumer_Loans_Flag(1) | ---
+9       615    0.740  0.641++  Insurance_Products_Flag(1) & Income_Group(Low Income Medium Income) & Children_Num(0 1) => Consumer_Loans_Flag(1) | ---
+7       597    0.700  0.552++  Insurance_Products_Flag(1) & Income_Group(High Income Low Income) => Consumer_Loans_Flag(1) | ---
+4       585    0.742  0.646++  Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Income_Group(Low Income Medium Income) => Consumer_Loans_Flag(1) | ---
+5       575    0.686  0.522++  Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Marital_Status(Married) => Consumer_Loans_Flag(1) | ---
+10      506    0.707  0.567++  Insurance_Products_Flag(1) & Income_Group(Medium Income No Income) => Consumer_Loans_Flag(1) | ---
+
+=== Jednotlivá pravidla (seřazeno podle BASE) ===
+
+=== Rule 1 (BASE=1103) ===
+
+
+
+Rule id : 1
+
+Base :  1103  Relative base : 0.110  CONF : 0.703  AAD : +0.559  BAD : -0.559
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  | 1103|  466|
+----|-----|-----|
+¬A  | 3406| 5025|
+----|-----|-----|
+
+
+=== Rule 3 (BASE=857) ===
+
+
+
+Rule id : 3
+
+Base :   857  Relative base : 0.086  CONF : 0.711  AAD : +0.577  BAD : -0.577
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  857|  348|
+----|-----|-----|
+¬A  | 3652| 5143|
+----|-----|-----|
+
+
+=== Rule 13 (BASE=832) ===
+
+
+
+Rule id : 13
+
+Base :   832  Relative base : 0.083  CONF : 0.718  AAD : +0.592  BAD : -0.592
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Children_Num(0 1)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  832|  327|
+----|-----|-----|
+¬A  | 3677| 5164|
+----|-----|-----|
+
+
+=== Rule 8 (BASE=789) ===
+
+
+
+Rule id : 8
+
+Base :   789  Relative base : 0.079  CONF : 0.728  AAD : +0.614  BAD : -0.614
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Income_Group(Low Income Medium Income)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  789|  295|
+----|-----|-----|
+¬A  | 3720| 5196|
+----|-----|-----|
+
+
+=== Rule 2 (BASE=679) ===
+
+
+
+Rule id : 2
+
+Base :   679  Relative base : 0.068  CONF : 0.710  AAD : +0.574  BAD : -0.574
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Age_Group(Middle-Age)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  679|  278|
+----|-----|-----|
+¬A  | 3830| 5213|
+----|-----|-----|
+
+
+=== Rule 11 (BASE=663) ===
+
+
+
+Rule id : 11
+
+Base :   663  Relative base : 0.066  CONF : 0.678  AAD : +0.503  BAD : -0.503
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Marital_Status(Married)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  663|  315|
+----|-----|-----|
+¬A  | 3846| 5176|
+----|-----|-----|
+
+
+=== Rule 12 (BASE=638) ===
+
+
+
+Rule id : 12
+
+Base :   638  Relative base : 0.064  CONF : 0.742  AAD : +0.645  BAD : -0.645
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Children_Num(0)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  638|  222|
+----|-----|-----|
+¬A  | 3871| 5269|
+----|-----|-----|
+
+
+=== Rule 6 (BASE=615) ===
+
+
+
+Rule id : 6
+
+Base :   615  Relative base : 0.061  CONF : 0.731  AAD : +0.622  BAD : -0.622
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Children_Num(0 1)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  615|  226|
+----|-----|-----|
+¬A  | 3894| 5265|
+----|-----|-----|
+
+
+=== Rule 9 (BASE=615) ===
+
+
+
+Rule id : 9
+
+Base :   615  Relative base : 0.061  CONF : 0.740  AAD : +0.641  BAD : -0.641
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Income_Group(Low Income Medium Income) & Children_Num(0 1)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  615|  216|
+----|-----|-----|
+¬A  | 3894| 5275|
+----|-----|-----|
+
+
+=== Rule 7 (BASE=597) ===
+
+
+
+Rule id : 7
+
+Base :   597  Relative base : 0.060  CONF : 0.700  AAD : +0.552  BAD : -0.552
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Income_Group(High Income Low Income)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  597|  256|
+----|-----|-----|
+¬A  | 3912| 5235|
+----|-----|-----|
+
+
+=== Rule 4 (BASE=585) ===
+
+
+
+Rule id : 4
+
+Base :   585  Relative base : 0.059  CONF : 0.742  AAD : +0.646  BAD : -0.646
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Income_Group(Low Income Medium Income)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  585|  203|
+----|-----|-----|
+¬A  | 3924| 5288|
+----|-----|-----|
+
+
+=== Rule 5 (BASE=575) ===
+
+
+
+Rule id : 5
+
+Base :   575  Relative base : 0.058  CONF : 0.686  AAD : +0.522  BAD : -0.522
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Age_Group(Middle-Age Senior) & Marital_Status(Married)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  575|  263|
+----|-----|-----|
+¬A  | 3934| 5228|
+----|-----|-----|
+
+
+=== Rule 10 (BASE=506) ===
+
+
+
+Rule id : 10
+
+Base :   506  Relative base : 0.051  CONF : 0.707  AAD : +0.567  BAD : -0.567
+
+Cedents:
+  antecedent : Insurance_Products_Flag(1) & Income_Group(Medium Income No Income)
+  succcedent : Consumer_Loans_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  506|  210|
+----|-----|-----|
+¬A  | 4003| 5281|
+----|-----|-----|
+
