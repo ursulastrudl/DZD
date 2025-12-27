@@ -37,7 +37,7 @@ Encoding columns into bit-form...done
 Data preparation finished.
 Will go for  4ftMiner
 Starting to mine rules.
-Done. Total verifications : 1400, rules 9, times: prep 0.02sec, processing 0.12sec
+Done. Total verifications : 1400, rules 9, times: prep 0.02sec, processing 0.14sec
 
 ================================================================================
 SPOUŠTÍM CLEVERMINER...

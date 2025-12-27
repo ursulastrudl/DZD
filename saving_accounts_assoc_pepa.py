@@ -49,7 +49,6 @@ for new_name, old_name in flag_columns.items():
         lambda x: 'Yes' if x == 1.0 else 'No'
     )
 
-# 3. CÍLOVÁ PROMĚNNÁ
 cleverminer_df['Time_Deposit'] = df['Time_Deposits_Flag'].apply(
     lambda x: 'Yes' if x == 'T' else 'No'
 )
