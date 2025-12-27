@@ -126,27 +126,27 @@ if __name__ == "__main__":
     print("FÁZE 2: TVORBA NOVÝCH SLOUPCŮ (Feature Engineering)")
     print("=" * 80)
 
-    # A) VÝPOČET VĚKU (Age_Calculated)
+    # A) VÝPOČET VĚKU (Age)
     print("⚙️  Převádím sloupce s daty na datetime...")
     df['Birth_Date_dt'] = pd.to_datetime(df['Birth_Date'], format='%d.%m.%Y', errors='coerce')
     df['Ref_Date_dt'] = pd.to_datetime(df['Ref_Date'], format='%d.%m.%Y', errors='coerce')
     
-    print("⚙️  Počítám nový věk (Age_Calculated)...")
+    print("⚙️  Počítám nový věk (Aged)...")
     # Logika: Rok reference - Rok narození, minus 1 pokud ještě letos neměl narozeniny
-    df['Age_Calculated'] = df.apply(
+    df['Age'] = df.apply(
         lambda row: row['Ref_Date_dt'].year - row['Birth_Date_dt'].year - 
         ((row['Ref_Date_dt'].month, row['Ref_Date_dt'].day) < (row['Birth_Date_dt'].month, row['Birth_Date_dt'].day))
         if pd.notnull(row['Ref_Date_dt']) and pd.notnull(row['Birth_Date_dt']) else np.nan, 
         axis=1
     )
     # Převedeme na integer (tam kde nejsou NaN)
-    df['Age_Calculated'] = df['Age_Calculated'].astype('Int64')
+    df['Age'] = df['Age'].astype('Int64')
 
     # B) VĚKOVÁ SKUPINA (Age_Group)
     print("⚙️  Vytvářím sloupec Age_Group...")
     # Použijeme buď původní sloupec 'Age' nebo náš nově vypočtený 'Age_Calculated'. 
     # Zde použiji nový výpočet pro přesnost.
-    df['Age_Group'] = df['Age_Calculated'].apply(get_age_group)
+    df['Age_Group'] = df['Age'].apply(get_age_group)
 
     # C) PŘÍJMOVÁ SKUPINA (Income_Group)
     # Předpokládám, že existuje sloupec 'Total_Income'. Pokud ne, skript by spadl, 
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     print("=" * 80)
     
     # Ukázka nových sloupců
-    preview_cols = ['Birth_Date', 'Ref_Date', 'Age_Calculated', 'Age_Group']
+    preview_cols = ['Birth_Date', 'Ref_Date', 'Age', 'Age_Group']
     if 'Income_Group' in df.columns:
         preview_cols.append('Income_Group')
         

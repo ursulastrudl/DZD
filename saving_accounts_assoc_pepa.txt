@@ -1,211 +1,31 @@
-================================================================================
-CLEVERMINER - EXPLORATIVNÍ ANALÝZA
-================================================================================
+=== Shrnutí ===
 
-Načteno: 10000 řádků, 49 sloupců
+CleverMiner task processing summary:
 
-📊 Připravuji kategoriální atributy...
-✓ Připraveno 13 kategoriálních atributů:
-  - Gender                   : 2 kategorií
-  - Marital_Status           : 4 kategorií
-  - Occupation               : 6 kategorií
-  - Payroll                  : 2 kategorií
-  - Business                 : 2 kategorií
-  - Saving_Account           : 2 kategorií
-  - Investment               : 2 kategorií
-  - Insurance                : 2 kategorií
-  - Business_Loan            : 2 kategorií
-  - Housing_Loan             : 2 kategorií
-  - Consumer_Loan            : 2 kategorií
-  - Credit_Card              : 2 kategorií
-  - Time_Deposit             : 2 kategorií
-
-================================================================================
-KONFIGURACE CLEVERMINER:
-================================================================================
-Quantifiers:
-  - Min support (Base): 100 řádků (1%)
-  - Min confidence (aad): 60%
-  - Min lift: 1.5
-  - Max délka antecedentu: 3 atributy
-Cleverminer version 1.2.5.
-Starting data preparation ...
-Automatically reordering numeric categories ...
-Automatically reordering numeric categories ...done
-Encoding columns into bit-form...
-Encoding columns into bit-form...done
-Data preparation finished.
-Will go for  4ftMiner
-Starting to mine rules.
-Done. Total verifications : 1400, rules 9, times: prep 0.02sec, processing 0.14sec
-
-================================================================================
-SPOUŠTÍM CLEVERMINER...
-================================================================================
+Task type : 4ftMiner
+Number of verifications : 1400
+Number of rules : 9
+Total time needed : 00h 00m 00s
+Time of data preparation : 00h 00m 00s
+Time of rule mining : 00h 00m 00s
 
 
-================================================================================
-SEZNAM VŠECH PRAVIDEL (seřazeno podle Lift):
-================================================================================
+=== Seznam pravidel (seřazeno podle BASE) ===
+RULEID  BASE   CONF   AAD     Rule
+6       143    0.464  2.444++  Investment(Yes) & Business_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
+7       143    0.478  2.548++  Investment(Yes) & Housing_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
+9       143    0.460  2.411++  Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
+5       142    0.481  2.571++  Investment(Yes) & Insurance(No) & Credit_Card(No) => Saving_Account(No) | ---
+8       140    0.465  2.450++  Investment(Yes) & Consumer_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
+4       109    0.478  2.547++  Marital_Status(Married) & Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
+2       105    0.407  2.019++  Gender(Female) & Investment(Yes) & Business_Loan(No) => Saving_Account(No) | ---
+3       105    0.410  2.043++  Gender(Female) & Investment(Yes) & Housing_Loan(No) => Saving_Account(No) | ---
+1       102    0.427  2.166++  Gender(Female) & Investment(Yes) & Insurance(No) => Saving_Account(No) | ---
 
-List of rules:
-RULEID BASE  CONF  AAD    Rule
-     1   102 0.427 +2.166 Gender(Female) & Investment(Yes) & Insurance(No) => Saving_Account(No) | ---
-     2   105 0.407 +2.019 Gender(Female) & Investment(Yes) & Business_Loan(No) => Saving_Account(No) | ---
-     3   105 0.410 +2.043 Gender(Female) & Investment(Yes) & Housing_Loan(No) => Saving_Account(No) | ---
-     4   109 0.478 +2.547 Marital_Status(Married) & Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
-     5   142 0.481 +2.571 Investment(Yes) & Insurance(No) & Credit_Card(No) => Saving_Account(No) | ---
-     6   143 0.464 +2.444 Investment(Yes) & Business_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-     7   143 0.478 +2.548 Investment(Yes) & Housing_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-     8   140 0.465 +2.450 Investment(Yes) & Consumer_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-     9   143 0.460 +2.411 Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
+=== Jednotlivá pravidla (seřazeno podle BASE) ===
 
+=== Rule 6 (BASE=143) ===
 
-================================================================================
-TOP 20 NEJZAJÍMAVĚJŠÍCH PRAVIDEL:
-================================================================================
-
-================================================================================
-PRAVIDLO #1
-================================================================================
-
-
-Rule id : 9
-
-Base :   143  Relative base : 0.014  CONF : 0.460  AAD : +2.411  BAD : -2.411
-
-Cedents:
-  antecedent : Investment(Yes) & Credit_Card(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  143|  168|
-----|-----|-----|
-¬A  | 1205| 8484|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #2
-================================================================================
-
-
-Rule id : 1
-
-Base :   102  Relative base : 0.010  CONF : 0.427  AAD : +2.166  BAD : -2.166
-
-Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Insurance(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  102|  137|
-----|-----|-----|
-¬A  | 1246| 8515|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #3
-================================================================================
-
-
-Rule id : 2
-
-Base :   105  Relative base : 0.011  CONF : 0.407  AAD : +2.019  BAD : -2.019
-
-Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Business_Loan(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  105|  153|
-----|-----|-----|
-¬A  | 1243| 8499|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #4
-================================================================================
-
-
-Rule id : 3
-
-Base :   105  Relative base : 0.011  CONF : 0.410  AAD : +2.043  BAD : -2.043
-
-Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Housing_Loan(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  105|  151|
-----|-----|-----|
-¬A  | 1243| 8501|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #5
-================================================================================
-
-
-Rule id : 4
-
-Base :   109  Relative base : 0.011  CONF : 0.478  AAD : +2.547  BAD : -2.547
-
-Cedents:
-  antecedent : Marital_Status(Married) & Investment(Yes) & Credit_Card(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  109|  119|
-----|-----|-----|
-¬A  | 1239| 8533|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #6
-================================================================================
-
-
-Rule id : 5
-
-Base :   142  Relative base : 0.014  CONF : 0.481  AAD : +2.571  BAD : -2.571
-
-Cedents:
-  antecedent : Investment(Yes) & Insurance(No) & Credit_Card(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  142|  153|
-----|-----|-----|
-¬A  | 1206| 8499|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #7
-================================================================================
 
 
 Rule id : 6
@@ -213,11 +33,8 @@ Rule id : 6
 Base :   143  Relative base : 0.014  CONF : 0.464  AAD : +2.444  BAD : -2.444
 
 Cedents:
-  antecedent : Investment(Yes) & Business_Loan(No) & Credit_Card(No)
-  succcedent : Saving_Account(No)
-  condition  : ---
-
-Fourfold table
+  antecedent : Investment(Yes) & Business_LDone. Total verifications : 1400, rules 9, times: prep 0.03sec, processing 0.27sec
+rfold table
     |  S  |  ¬S |
 ----|-----|-----|
  A  |  143|  165|
@@ -226,9 +43,8 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-PRAVIDLO #8
-================================================================================
+=== Rule 7 (BASE=143) ===
+
 
 
 Rule id : 7
@@ -249,9 +65,52 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-PRAVIDLO #9
-================================================================================
+=== Rule 9 (BASE=143) ===
+
+
+
+Rule id : 9
+
+Base :   143  Relative base : 0.014  CONF : 0.460  AAD : +2.411  BAD : -2.411
+
+Cedents:
+  antecedent : Investment(Yes) & Credit_Card(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  143|  168|
+----|-----|-----|
+¬A  | 1205| 8484|
+----|-----|-----|
+
+
+=== Rule 5 (BASE=142) ===
+
+
+
+Rule id : 5
+
+Base :   142  Relative base : 0.014  CONF : 0.481  AAD : +2.571  BAD : -2.571
+
+Cedents:
+  antecedent : Investment(Yes) & Insurance(No) & Credit_Card(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  142|  153|
+----|-----|-----|
+¬A  | 1206| 8499|
+----|-----|-----|
+
+
+=== Rule 8 (BASE=140) ===
+
 
 
 Rule id : 8
@@ -272,9 +131,90 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-ANALÝZA DOKONČENA!
-================================================================================
+=== Rule 4 (BASE=109) ===
 
- Celkem nalezeno pravidel: 9
- Kategoriálních atributů použito: 13
+
+
+Rule id : 4
+
+Base :   109  Relative base : 0.011  CONF : 0.478  AAD : +2.547  BAD : -2.547
+
+Cedents:
+  antecedent : Marital_Status(Married) & Investment(Yes) & Credit_Card(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  109|  119|
+----|-----|-----|
+¬A  | 1239| 8533|
+----|-----|-----|
+
+
+=== Rule 2 (BASE=105) ===
+
+
+
+Rule id : 2
+
+Base :   105  Relative base : 0.011  CONF : 0.407  AAD : +2.019  BAD : -2.019
+
+Cedents:
+  antecedent : Gender(Female) & Investment(Yes) & Business_Loan(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  105|  153|
+----|-----|-----|
+¬A  | 1243| 8499|
+----|-----|-----|
+
+
+=== Rule 3 (BASE=105) ===
+
+
+
+Rule id : 3
+
+Base :   105  Relative base : 0.011  CONF : 0.410  AAD : +2.043  BAD : -2.043
+
+Cedents:
+  antecedent : Gender(Female) & Investment(Yes) & Housing_Loan(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  105|  151|
+----|-----|-----|
+¬A  | 1243| 8501|
+----|-----|-----|
+
+
+=== Rule 1 (BASE=102) ===
+
+
+
+Rule id : 1
+
+Base :   102  Relative base : 0.010  CONF : 0.427  AAD : +2.166  BAD : -2.166
+
+Cedents:
+  antecedent : Gender(Female) & Investment(Yes) & Insurance(No)
+  succcedent : Saving_Account(No)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  102|  137|
+----|-----|-----|
+¬A  | 1246| 8515|
+----|-----|-----|
+

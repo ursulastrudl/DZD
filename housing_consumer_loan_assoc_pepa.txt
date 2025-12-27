@@ -1,71 +1,29 @@
-================================================================================
-CLEVERMINER - EXPLORATIVNÍ ANALÝZA
-================================================================================
+=== Shrnutí ===
 
-Načteno: 10000 řádků, 49 sloupců
+CleverMiner task processing summary:
 
-📊 Připravuji kategoriální atributy...
-✓ Připraveno 13 kategoriálních atributů:
-  - Gender                   : 2 kategorií
-  - Marital_Status           : 4 kategorií
-  - Occupation               : 6 kategorií
-  - Payroll                  : 2 kategorií
-  - Business                 : 2 kategorií
-  - Saving_Account           : 2 kategorií
-  - Investment               : 2 kategorií
-  - Insurance                : 2 kategorií
-  - Business_Loan            : 2 kategorií
-  - Housing_Loan             : 2 kategorií
-  - Consumer_Loan            : 2 kategorií
-  - Credit_Card              : 2 kategorií
-  - Time_Deposit             : 2 kategorií
-
-================================================================================
-KONFIGURACE CLEVERMINER:
-================================================================================
-Quantifiers:
-  - Min support (Base): 100 řádků (1%)
-  - Min confidence (aad): 60%
-  - Min lift: 1.5
-  - Max délka antecedentu: 3 atributy
-Cleverminer version 1.2.5.
-Starting data preparation ...
-Automatically reordering numeric categories ...
-Automatically reordering numeric categories ...done
-Encoding columns into bit-form...
-Encoding columns into bit-form...done
-Data preparation finished.
-Will go for  4ftMiner
-Starting to mine rules.
-Done. Total verifications : 3103, rules 7, times: prep 0.02sec, processing 0.17sec
-
-================================================================================
-SPOUŠTÍM CLEVERMINER...
-================================================================================
+Task type : 4ftMiner
+Number of verifications : 3103
+Number of rules : 7
+Total time needed : 00h 00m 00s
+Time of data preparation : 00h 00m 00s
+Time of rule mining : 00h 00m 00s
 
 
-================================================================================
-SEZNAM VŠECH PRAVIDEL (seřazeno podle Lift):
-================================================================================
+=== Seznam pravidel (seřazeno podle BASE) ===
+RULEID  BASE   CONF   AAD     Rule
+7       377    0.277  3.684++  Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
+5       374    0.249  3.213++  Investment(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
+3       373    0.255  3.320++  Business_Loan(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
+6       351    0.270  3.565++  Investment(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
+4       350    0.278  3.696++  Business_Loan(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
+1       348    0.249  3.218++  Business_Loan(No) & Investment(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
+2       325    0.270  3.575++  Business_Loan(No) & Investment(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
 
-List of rules:
-RULEID BASE  CONF  AAD    Rule
-     1   348 0.249 +3.218 Business_Loan(No) & Investment(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
-     2   325 0.270 +3.575 Business_Loan(No) & Investment(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
-     3   373 0.255 +3.320 Business_Loan(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
-     4   350 0.278 +3.696 Business_Loan(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
-     5   374 0.249 +3.213 Investment(No) & Insurance(Yes) => Housing_Loan(Yes) | ---
-     6   351 0.270 +3.565 Investment(No) & Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
-     7   377 0.277 +3.684 Insurance(Yes) & Saving_Account(Yes) => Housing_Loan(Yes) | ---
+=== Jednotlivá pravidla (seřazeno podle BASE) ===
 
+=== Rule 7 (BASE=377) ===
 
-================================================================================
-TOP 20 NEJZAJÍMAVĚJŠÍCH PRAVIDEL:
-================================================================================
-
-================================================================================
-PRAVIDLO #1
-================================================================================
 
 
 Rule id : 7
@@ -86,55 +44,28 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-PRAVIDLO #2
-================================================================================
+=== Rule 5 (BASE=374) ===
 
 
-Rule id : 1
 
-Base :   348  Relative base : 0.035  CONF : 0.249  AAD : +3.218  BAD : -3.218
+Rule id : 5
 
-Cedents:
-  antecedent : Business_Loan(No) & Investment(No) & Insurance(Yes)
+Base :   374Done. Total verifications : 3103, rules 7, times: prep 0.03sec, processing 0.37sec
+edent : Investment(No) & Insurance(Yes)
   succcedent : Housing_Loan(Yes)
   condition  : ---
 
 Fourfold table
     |  S  |  ¬S |
 ----|-----|-----|
- A  |  348| 1048|
+ A  |  374| 1128|
 ----|-----|-----|
-¬A  |  243| 8361|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #3
-================================================================================
-
-
-Rule id : 2
-
-Base :   325  Relative base : 0.033  CONF : 0.270  AAD : +3.575  BAD : -3.575
-
-Cedents:
-  antecedent : Business_Loan(No) & Investment(No) & Insurance(Yes) & Saving_Account(Yes)
-  succcedent : Housing_Loan(Yes)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  325|  877|
-----|-----|-----|
-¬A  |  266| 8532|
+¬A  |  217| 8281|
 ----|-----|-----|
 
 
-================================================================================
-PRAVIDLO #4
-================================================================================
+=== Rule 3 (BASE=373) ===
+
 
 
 Rule id : 3
@@ -155,55 +86,8 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-PRAVIDLO #5
-================================================================================
+=== Rule 6 (BASE=351) ===
 
-
-Rule id : 4
-
-Base :   350  Relative base : 0.035  CONF : 0.278  AAD : +3.696  BAD : -3.696
-
-Cedents:
-  antecedent : Business_Loan(No) & Insurance(Yes) & Saving_Account(Yes)
-  succcedent : Housing_Loan(Yes)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  350|  911|
-----|-----|-----|
-¬A  |  241| 8498|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #6
-================================================================================
-
-
-Rule id : 5
-
-Base :   374  Relative base : 0.037  CONF : 0.249  AAD : +3.213  BAD : -3.213
-
-Cedents:
-  antecedent : Investment(No) & Insurance(Yes)
-  succcedent : Housing_Loan(Yes)
-  condition  : ---
-
-Fourfold table
-    |  S  |  ¬S |
-----|-----|-----|
- A  |  374| 1128|
-----|-----|-----|
-¬A  |  217| 8281|
-----|-----|-----|
-
-
-================================================================================
-PRAVIDLO #7
-================================================================================
 
 
 Rule id : 6
@@ -224,9 +108,68 @@ Fourfold table
 ----|-----|-----|
 
 
-================================================================================
-ANALÝZA DOKONČENA!
-================================================================================
+=== Rule 4 (BASE=350) ===
 
- Celkem nalezeno pravidel: 7
- Kategoriálních atributů použito: 13
+
+
+Rule id : 4
+
+Base :   350  Relative base : 0.035  CONF : 0.278  AAD : +3.696  BAD : -3.696
+
+Cedents:
+  antecedent : Business_Loan(No) & Insurance(Yes) & Saving_Account(Yes)
+  succcedent : Housing_Loan(Yes)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  350|  911|
+----|-----|-----|
+¬A  |  241| 8498|
+----|-----|-----|
+
+
+=== Rule 1 (BASE=348) ===
+
+
+
+Rule id : 1
+
+Base :   348  Relative base : 0.035  CONF : 0.249  AAD : +3.218  BAD : -3.218
+
+Cedents:
+  antecedent : Business_Loan(No) & Investment(No) & Insurance(Yes)
+  succcedent : Housing_Loan(Yes)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  348| 1048|
+----|-----|-----|
+¬A  |  243| 8361|
+----|-----|-----|
+
+
+=== Rule 2 (BASE=325) ===
+
+
+
+Rule id : 2
+
+Base :   325  Relative base : 0.033  CONF : 0.270  AAD : +3.575  BAD : -3.575
+
+Cedents:
+  antecedent : Business_Loan(No) & Investment(No) & Insurance(Yes) & Saving_Account(Yes)
+  succcedent : Housing_Loan(Yes)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  325|  877|
+----|-----|-----|
+¬A  |  266| 8532|
+----|-----|-----|
+

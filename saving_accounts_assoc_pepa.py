@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from cleverminer import cleverminer
 import sys
-
+import io 
 # PŘESMĚROVÁNÍ VÝSTUPU DO SOUBORU
 sys.stdout = open('saving_accounts_assoc_pepa.txt', 'w', encoding='utf-8')
 
@@ -123,53 +123,49 @@ succ={
 # SPUŠTĚNÍ A VÝSLEDKY
 # ============================================================================
 
-print("\n" + "=" * 80)
-print("SPOUŠTÍM CLEVERMINER...")
-print("=" * 80)
-print()
+# ============================================================================
+# SPUŠTĚNÍ A VÝSLEDKY
+# ============================================================================
 
-# Souhrn
-""" print("=" * 80)
-print("SOUHRN ANALÝZY:")
-print("=" * 80)
-clm.print_summary() """
+# Zachycení výstupu
+output1 = io.StringIO()
+sys.stdout = output1
 
-# Seznam všech pravidel
-print("\n" + "=" * 80)
-print("SEZNAM VŠECH PRAVIDEL (seřazeno podle Lift):")
-print("=" * 80)
-clm.print_rulelist()
+print("=== Shrnutí ===")
+clm.print_summary()
 
-# Detailní výpis TOP 20 pravidel
-print("\n" + "=" * 80)
-print("TOP 20 NEJZAJÍMAVĚJŠÍCH PRAVIDEL:")
-print("=" * 80)
+# Získání všech pravidel a jejich BASE hodnot
+rules_data = []
+for i in range(1, len(clm.rulelist) + 1):
+    quants = clm.get_quantifiers(i)
+    rules_data.append({
+        'rule_id': i,
+        'base': quants.get('base', 0),
+        'conf': quants.get('conf', 0),
+        'aad': quants.get('aad', 0)
+    })
 
-num_rules = min(20, len(clm.rulelist))
-for i in range(num_rules):
-    print("\n" + "=" * 80)
-    print(f"PRAVIDLO #{i+1}")
-    print("=" * 80)
-    clm.print_rule(i)
+# Seřazení podle BASE (sestupně)
+rules_data_sorted = sorted(rules_data, key=lambda x: x['base'], reverse=True)
 
-# Export do CSV
-""" try:
-    results_df = pd.DataFrame(clm.rulelist)
-    results_df.to_csv('CleverMiner_Results_Exploratory.csv', 
-                      index=False, encoding='utf-8', sep=';')
-    print("\n" + "=" * 80)
-    print("✓ EXPORT ÚSPĚŠNÝ")
-    print("=" * 80)
-    print(f"Soubor: CleverMiner_Results_Exploratory.csv")
-    print(f"Počet pravidel: {len(results_df)}")
-except Exception as e:
-    print(f"\n⚠ Export se nezdařil: {e}")
- """
-# Závěrečné statistiky
-print("\n" + "=" * 80)
-print("ANALÝZA DOKONČENA!")
-print("=" * 80)
-print(f"\n Celkem nalezeno pravidel: {len(clm.rulelist)}")
-print(f" Kategoriálních atributů použito: {len(cleverminer_df.columns)}")
+print("\n=== Seznam pravidel (seřazeno podle BASE) ===")
+print(f"{'RULEID':<7} {'BASE':<6} {'CONF':<6} {'AAD':<7} Rule")
 
-sys.stdout.close()
+for rule_info in rules_data_sorted:
+    rule_id = rule_info['rule_id']
+    rule_text = clm.get_ruletext(rule_id)
+    print(f"{rule_id:<7} {rule_info['base']:<6} {rule_info['conf']:<6.3f} {rule_info['aad']:+<7.3f} {rule_text}")
+
+print("\n=== Jednotlivá pravidla (seřazeno podle BASE) ===")
+for rule_info in rules_data_sorted:
+    rule_id = rule_info['rule_id']
+    print(f"\n=== Rule {rule_id} (BASE={rule_info['base']}) ===\n")
+    clm.print_rule(rule_id)
+
+sys.stdout = sys.__stdout__
+
+# Uložení výstupu
+with open("saving_accounts_assoc_pepa.txt", "w", encoding="utf-8") as f:
+    f.write(output1.getvalue())
+
+print("✓ Analýza 1 dokončena a uložena: saving_accounts_assoc_pepa.txt")
