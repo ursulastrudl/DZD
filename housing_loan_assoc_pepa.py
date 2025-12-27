@@ -4,7 +4,7 @@ from cleverminer import cleverminer
 import sys
 
 # PŘESMĚROVÁNÍ VÝSTUPU DO SOUBORU
-sys.stdout = open('housing_loan_assoc.txt', 'w', encoding='utf-8')
+sys.stdout = open('housing_consumer_loan_assoc_pepa.txt', 'w', encoding='utf-8')
 
 # ============================================================================
 # NAČTENÍ DAT
@@ -49,7 +49,6 @@ for new_name, old_name in flag_columns.items():
         lambda x: 'Yes' if x == 1.0 else 'No'
     )
 
-# 3. CÍLOVÁ PROMĚNNÁ
 cleverminer_df['Time_Deposit'] = df['Time_Deposits_Flag'].apply(
     lambda x: 'Yes' if x == 'T' else 'No'
 )
