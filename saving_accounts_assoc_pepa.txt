@@ -1,4 +1,10 @@
-=== Shrnutí ===
+================================================================================
+ANALÝZA: SPOŘICÍ ÚČTY (SAVING ACCOUNTS)
+================================================================================
+
+Business otázka: Které skupiny klientů mají spořicí účty?
+Použití: Cross-selling spořicích produktů, identifikace spoření
+
 
 CleverMiner task processing summary:
 
@@ -12,17 +18,17 @@ Time of rule mining : 00h 00m 00s
 
 === Seznam pravidel (seřazeno podle BASE) ===
 RULEID  BASE   CONF   AAD     Rule
-6       143    0.464  2.444++  Investment(Yes) & Business_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-7       143    0.478  2.548++  Investment(Yes) & Housing_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-9       143    0.460  2.411++  Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
-5       142    0.481  2.571++  Investment(Yes) & Insurance(No) & Credit_Card(No) => Saving_Account(No) | ---
-8       140    0.465  2.450++  Investment(Yes) & Consumer_Loan(No) & Credit_Card(No) => Saving_Account(No) | ---
-4       109    0.478  2.547++  Marital_Status(Married) & Investment(Yes) & Credit_Card(No) => Saving_Account(No) | ---
-2       105    0.407  2.019++  Gender(Female) & Investment(Yes) & Business_Loan(No) => Saving_Account(No) | ---
-3       105    0.410  2.043++  Gender(Female) & Investment(Yes) & Housing_Loan(No) => Saving_Account(No) | ---
-1       102    0.427  2.166++  Gender(Female) & Investment(Yes) & Insurance(No) => Saving_Account(No) | ---
+6       143    0.464  2.444++  Investment_Products_Flag(1) & Business_Loans_Flag(0) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+7       143    0.478  2.548++  Investment_Products_Flag(1) & Housing_Loans_Flag(0) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+9       143    0.460  2.411++  Investment_Products_Flag(1) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+5       142    0.481  2.571++  Investment_Products_Flag(1) & Insurance_Products_Flag(0) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+8       140    0.465  2.450++  Investment_Products_Flag(1) & Consumer_Loans_Flag(0) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+4       109    0.478  2.547++  Marital_Status(Married) & Investment_Products_Flag(1) & Credit_Cards_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+2       105    0.407  2.019++  Gender(Female) & Investment_Products_Flag(1) & Business_Loans_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+3       105    0.410  2.043++  Gender(Female) & Investment_Products_Flag(1) & Housing_Loans_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
+1       102    0.427  2.166++  Gender(Female) & Investment_Products_Flag(1) & Insurance_Products_Flag(0) => Saving_Current_Accounts_Flag(0) | ---
 
-=== Jednotlivá pravidla (seřazeno podle BASE) ===
+=== Jednotlivá pravidla ===
 
 === Rule 6 (BASE=143) ===
 
@@ -33,8 +39,11 @@ Rule id : 6
 Base :   143  Relative base : 0.014  CONF : 0.464  AAD : +2.444  BAD : -2.444
 
 Cedents:
-  antecedent : Investment(Yes) & Business_LDone. Total verifications : 1400, rules 9, times: prep 0.03sec, processing 0.27sec
-rfold table
+  antecedent : Investment_Products_Flag(1) & Business_Loans_Flag(0) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
+  condition  : ---
+
+Fourfold table
     |  S  |  ¬S |
 ----|-----|-----|
  A  |  143|  165|
@@ -52,8 +61,8 @@ Rule id : 7
 Base :   143  Relative base : 0.014  CONF : 0.478  AAD : +2.548  BAD : -2.548
 
 Cedents:
-  antecedent : Investment(Yes) & Housing_Loan(No) & Credit_Card(No)
-  succcedent : Saving_Account(No)
+  antecedent : Investment_Products_Flag(1) & Housing_Loans_Flag(0) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -74,8 +83,8 @@ Rule id : 9
 Base :   143  Relative base : 0.014  CONF : 0.460  AAD : +2.411  BAD : -2.411
 
 Cedents:
-  antecedent : Investment(Yes) & Credit_Card(No)
-  succcedent : Saving_Account(No)
+  antecedent : Investment_Products_Flag(1) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -96,8 +105,8 @@ Rule id : 5
 Base :   142  Relative base : 0.014  CONF : 0.481  AAD : +2.571  BAD : -2.571
 
 Cedents:
-  antecedent : Investment(Yes) & Insurance(No) & Credit_Card(No)
-  succcedent : Saving_Account(No)
+  antecedent : Investment_Products_Flag(1) & Insurance_Products_Flag(0) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -118,8 +127,8 @@ Rule id : 8
 Base :   140  Relative base : 0.014  CONF : 0.465  AAD : +2.450  BAD : -2.450
 
 Cedents:
-  antecedent : Investment(Yes) & Consumer_Loan(No) & Credit_Card(No)
-  succcedent : Saving_Account(No)
+  antecedent : Investment_Products_Flag(1) & Consumer_Loans_Flag(0) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -140,8 +149,8 @@ Rule id : 4
 Base :   109  Relative base : 0.011  CONF : 0.478  AAD : +2.547  BAD : -2.547
 
 Cedents:
-  antecedent : Marital_Status(Married) & Investment(Yes) & Credit_Card(No)
-  succcedent : Saving_Account(No)
+  antecedent : Marital_Status(Married) & Investment_Products_Flag(1) & Credit_Cards_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -162,8 +171,8 @@ Rule id : 2
 Base :   105  Relative base : 0.011  CONF : 0.407  AAD : +2.019  BAD : -2.019
 
 Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Business_Loan(No)
-  succcedent : Saving_Account(No)
+  antecedent : Gender(Female) & Investment_Products_Flag(1) & Business_Loans_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -184,8 +193,8 @@ Rule id : 3
 Base :   105  Relative base : 0.011  CONF : 0.410  AAD : +2.043  BAD : -2.043
 
 Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Housing_Loan(No)
-  succcedent : Saving_Account(No)
+  antecedent : Gender(Female) & Investment_Products_Flag(1) & Housing_Loans_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table
@@ -206,8 +215,8 @@ Rule id : 1
 Base :   102  Relative base : 0.010  CONF : 0.427  AAD : +2.166  BAD : -2.166
 
 Cedents:
-  antecedent : Gender(Female) & Investment(Yes) & Insurance(No)
-  succcedent : Saving_Account(No)
+  antecedent : Gender(Female) & Investment_Products_Flag(1) & Insurance_Products_Flag(0)
+  succcedent : Saving_Current_Accounts_Flag(0)
   condition  : ---
 
 Fourfold table

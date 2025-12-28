@@ -1,167 +1,86 @@
 import pandas as pd
-from sklearn.impute import SimpleImputer
-from cleverminer import cleverminer
 import sys
-import io 
-# PŘESMĚROVÁNÍ VÝSTUPU DO SOUBORU
-sys.stdout = open('housing_consumer_loan_assoc_pepa.txt', 'w', encoding='utf-8')
+import io
+from cleverminer import *
 
-# ============================================================================
-# NAČTENÍ DAT
-# ============================================================================
+# Načtení dat
+df = pd.read_csv('TimeDeposit_10K_clean.csv', sep=';')
 
-df = pd.read_csv('TimeDeposit_10K_clean.csv', sep=';', encoding='utf-8')
+# Výběr pouze potřebných sloupců
+df = df[[
+    'Gender',
+    'Marital_Status',
+    'Occupation_Category',
+    'Business_Loans_Flag',
+    'Investment_Products_Flag',
+    'Insurance_Products_Flag',
+    'Saving_Current_Accounts_Flag',
+    'Credit_Cards_Flag',
+    'Housing_Loans_Flag',
+    'Consumer_Loans_Flag'
+]]
 
-print("=" * 80)
-print("CLEVERMINER - EXPLORATIVNÍ ANALÝZA")
-print("=" * 80)
-print(f"\nNačteno: {len(df)} řádků, {len(df.columns)} sloupců")
-
-# ============================================================================
-# VÝBĚR A PŘEVOD KATEGORIÁLNÍCH ATRIBUTŮ
-# ============================================================================
-
-print("\n📊 Připravuji kategoriální atributy...")
-
-# Vytvoření nového DataFrame POUZE s kategoriálními atributy
-cleverminer_df = pd.DataFrame()
-
-# 1. KATEGORIÁLNÍ ATRIBUTY (již existující)
-cleverminer_df['Gender'] = df['Gender']
-cleverminer_df['Marital_Status'] = df['Marital_Status']
-cleverminer_df['Occupation'] = df['Occupation_Category']
-
-# 2. FLAG ATRIBUTY → převod na Yes/No
-flag_columns = {
-    'Payroll': 'Payroll_Flag',
-    'Business': 'Business_Flag',
-    'Saving_Account': 'Saving_Current_Accounts_Flag',
-    'Investment': 'Investment_Products_Flag',
-    'Insurance': 'Insurance_Products_Flag',
-    'Business_Loan': 'Business_Loans_Flag',
-    'Housing_Loan': 'Housing_Loans_Flag',
-    'Consumer_Loan': 'Consumer_Loans_Flag',
-    'Credit_Card': 'Credit_Cards_Flag'
-}
-
-for new_name, old_name in flag_columns.items():
-    cleverminer_df[new_name] = df[old_name].apply(
-        lambda x: 'Yes' if x == 1.0 else 'No'
-    )
-
-cleverminer_df['Time_Deposit'] = df['Time_Deposits_Flag'].apply(
-    lambda x: 'Yes' if x == 'T' else 'No'
-)
-
-print(f"✓ Připraveno {len(cleverminer_df.columns)} kategoriálních atributů:")
-for col in cleverminer_df.columns:
-    unique_count = cleverminer_df[col].nunique()
-    print(f"  - {col:25s}: {unique_count} kategorií")
-
-# Handle missing values
-imputer = SimpleImputer(strategy="most_frequent")
-cleverminer_df = pd.DataFrame(imputer.fit_transform(cleverminer_df), 
-                               columns=cleverminer_df.columns)
-
-# ============================================================================
-# NASTAVENÍ CLEVERMINER
-# ============================================================================
-
-print("\n" + "=" * 80)
-print("KONFIGURACE CLEVERMINER:")
-print("=" * 80)
-print("Quantifiers:")
-print("  - Min support (Base): 100 řádků (1%)")
-print("  - Min confidence (aad): 60%")
-print("  - Min lift: 1.5")
-print("  - Max délka antecedentu: 3 atributy")
-
+# CleverMiner analýza
 clm = cleverminer(
-    df=cleverminer_df,
+    df=df, 
     proc='4ftMiner',
-    
-    # METRIKY
-    quantifiers={
-        'Base': 300,        # Minimální support = 100 řádků (1%)
-        'aad': 1,         
+    quantifiers={'Base': 300, 'aad': 1},
+    ante={
+        'attributes': [
+            {'name': 'Gender', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Marital_Status', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Occupation_Category', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Business_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Investment_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Insurance_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Saving_Current_Accounts_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Credit_Cards_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
+        ], 
+        'minlen': 2, 
+        'maxlen': 4, 
+        'type': 'con'
     },
-    
-    # ANTECEDENT (levá strana: IF ...)
-ante={
-    'attributes': [
-        # Demografické
-        {'name': 'Gender', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Marital_Status', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Occupation', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        
-        # Produkty - VŠECHNY kromě cílových
-        {'name': 'Business_Loan', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Investment', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Insurance', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Saving_Account', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Credit_Card', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-    ],
-    'minlen': 2,
-    'maxlen': 4,
-    'type': 'con'
-},
-
-# CONSEQUENT (pravá strana: THEN ...)
-# POUZE cílové proměnné, které NEJSOU v antecedent
-succ={
-    'attributes': [
-        {'name': 'Housing_Loan', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-        {'name': 'Consumer_Loan', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-    ],
-    'minlen': 1,
-    'maxlen': 2,
-    'type': 'con'
-}
+    succ={
+        'attributes': [
+            {'name': 'Housing_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Consumer_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
+        ], 
+        'minlen': 1, 
+        'maxlen': 1, 
+        'type': 'con'
+    }
 )
-
-# ============================================================================
-# SPUŠTĚNÍ A VÝSLEDKY
-# ============================================================================
 
 # Zachycení výstupu
-output1 = io.StringIO()
-sys.stdout = output1
+output = io.StringIO()
+sys.stdout = output
 
-print("=== Shrnutí ===")
+print("=== HOUSING & CONSUMER LOANS ===\n")
 clm.print_summary()
 
-# Získání všech pravidel a jejich BASE hodnot
+print("\n=== Seznam pravidel (seřazeno podle BASE) ===")
+
+# Seřazení podle BASE
 rules_data = []
 for i in range(1, len(clm.rulelist) + 1):
     quants = clm.get_quantifiers(i)
-    rules_data.append({
-        'rule_id': i,
-        'base': quants.get('base', 0),
-        'conf': quants.get('conf', 0),
-        'aad': quants.get('aad', 0)
-    })
+    rules_data.append({'id': i, 'base': quants.get('base', 0)})
 
-# Seřazení podle BASE (sestupně)
-rules_data_sorted = sorted(rules_data, key=lambda x: x['base'], reverse=True)
+rules_sorted = sorted(rules_data, key=lambda x: x['base'], reverse=True)
 
-print("\n=== Seznam pravidel (seřazeno podle BASE) ===")
-print(f"{'RULEID':<7} {'BASE':<6} {'CONF':<6} {'AAD':<7} Rule")
+print(f"{'ID':<5} {'BASE':<6} Rule")
+for r in rules_sorted:
+    print(f"{r['id']:<5} {r['base']:<6} {clm.get_ruletext(r['id'])}")
 
-for rule_info in rules_data_sorted:
-    rule_id = rule_info['rule_id']
-    rule_text = clm.get_ruletext(rule_id)
-    print(f"{rule_id:<7} {rule_info['base']:<6} {rule_info['conf']:<6.3f} {rule_info['aad']:+<7.3f} {rule_text}")
-
-print("\n=== Jednotlivá pravidla (seřazeno podle BASE) ===")
-for rule_info in rules_data_sorted:
-    rule_id = rule_info['rule_id']
-    print(f"\n=== Rule {rule_id} (BASE={rule_info['base']}) ===\n")
-    clm.print_rule(rule_id)
+print("\n=== TOP 20 pravidel ===")
+for i, r in enumerate(rules_sorted[:20], 1):
+    print(f"\n=== Rule {r['id']} (BASE={r['base']}) ===\n")
+    clm.print_rule(r['id'])
 
 sys.stdout = sys.__stdout__
 
-# Uložení výstupu
-with open("housing_consumer_loan_assoc_pepa.txt", "w", encoding="utf-8") as f:
-    f.write(output1.getvalue())
+# Uložení
+with open("housing_consumer_loans_pepa.txt", "w", encoding="utf-8") as f:
+    f.write(output.getvalue())
 
-print("✓ Analýza 1 dokončena a uložena: housing_consumer_loan_assoc_pepa.txt")
+print("✓ Výstup uložen: housing_consumer_loans_pepa.txt")
