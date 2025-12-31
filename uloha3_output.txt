@@ -1,0 +1,111 @@
+
+CleverMiner task processing summary:
+
+Task type : 4ftMiner
+Number of verifications : 106
+Number of rules : 4
+Total time needed : 00h 00m 00s
+Time of data preparation : 00h 00m 00s
+Time of rule mining : 00h 00m 00s
+
+
+=== Seznam pravidel (seřazeno podle BASE) ===
+RULEID  BASE   CONF   AAD     Rule
+2       498    0.203  1.573++  Income_Group(High Income) => Business_Flag(1) | ---
+3       382    0.187  1.366++  Income_Group(High Income) & Marital_Status(Married) => Business_Flag(1) | ---
+4       353    0.236  1.989++  Income_Group(High Income) & Gender(Male) => Business_Flag(1) | ---
+1       333    0.205  1.599++  Age_Group(Middle-Age) & Income_Group(High Income) => Business_Flag(1) | ---
+
+=== TOP 20 pravidel ===
+
+================================================================================
+PRAVIDLO #1 (Rule ID: 2, BASE=498)
+================================================================================
+
+
+Rule id : 2
+
+Base :   498  Relative base : 0.050  CONF : 0.203  AAD : +1.573  BAD : -1.573
+
+Cedents:
+  antecedent : Income_Group(High Income)
+  succcedent : Business_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  498| 1955|
+----|-----|-----|
+¬A  |  291| 7256|
+----|-----|-----|
+
+
+================================================================================
+PRAVIDLO #2 (Rule ID: 3, BASE=382)
+================================================================================
+
+
+Rule id : 3
+
+Base :   382  Relative base : 0.038  CONF : 0.187  AAD : +1.366  BAD : -1.366
+
+Cedents:
+  antecedent : Income_Group(High Income) & Marital_Status(Married)
+  succcedent : Business_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  382| 1664|
+----|-----|-----|
+¬A  |  407| 7547|
+----|-----|-----|
+
+
+================================================================================
+PRAVIDLO #3 (Rule ID: 4, BASE=353)
+================================================================================
+
+
+Rule id : 4
+
+Base :   353  Relative base : 0.035  CONF : 0.236  AAD : +1.989  BAD : -1.989
+
+Cedents:
+  antecedent : Income_Group(High Income) & Gender(Male)
+  succcedent : Business_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  353| 1144|
+----|-----|-----|
+¬A  |  436| 8067|
+----|-----|-----|
+
+
+================================================================================
+PRAVIDLO #4 (Rule ID: 1, BASE=333)
+================================================================================
+
+
+Rule id : 1
+
+Base :   333  Relative base : 0.033  CONF : 0.205  AAD : +1.599  BAD : -1.599
+
+Cedents:
+  antecedent : Age_Group(Middle-Age) & Income_Group(High Income)
+  succcedent : Business_Flag(1)
+  condition  : ---
+
+Fourfold table
+    |  S  |  ¬S |
+----|-----|-----|
+ A  |  333| 1291|
+----|-----|-----|
+¬A  |  456| 7920|
+----|-----|-----|
+

@@ -11,42 +11,42 @@ df = df[[
     'Gender',
     'Marital_Status',
     'Occupation_Category',
+    'Business_Loans_Flag',
     'Investment_Products_Flag',
     'Insurance_Products_Flag',
-    'Business_Loans_Flag',
-    'Housing_Loans_Flag',
-    'Consumer_Loans_Flag',
+    'Saving_Current_Accounts_Flag',
     'Credit_Cards_Flag',
-    'Saving_Current_Accounts_Flag'
+    'Housing_Loans_Flag',
+    'Consumer_Loans_Flag'
 ]]
 
 # CleverMiner analýza
 clm = cleverminer(
-    df=df,
+    df=df, 
     proc='4ftMiner',
-    quantifiers={'Base': 100, 'aad': 2},
+    quantifiers={'Base': 300, 'aad': 1},
     ante={
         'attributes': [
             {'name': 'Gender', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Marital_Status', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Occupation_Category', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Business_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Investment_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Insurance_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Business_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Housing_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Consumer_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Saving_Current_Accounts_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Credit_Cards_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
-        ],
-        'minlen': 1,
-        'maxlen': 3,
+        ], 
+        'minlen': 2, 
+        'maxlen': 4, 
         'type': 'con'
     },
     succ={
         'attributes': [
-            {'name': 'Saving_Current_Accounts_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
-        ],
-        'minlen': 1,
-        'maxlen': 1,
+            {'name': 'Housing_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Consumer_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
+        ], 
+        'minlen': 1, 
+        'maxlen': 1, 
         'type': 'con'
     }
 )
@@ -55,38 +55,32 @@ clm = cleverminer(
 output = io.StringIO()
 sys.stdout = output
 
-print("=" * 80)
-print("ANALÝZA: SPOŘICÍ ÚČTY (SAVING ACCOUNTS)")
-print("=" * 80)
-print("\nBusiness otázka: Které skupiny klientů mají spořicí účty?")
-print("Použití: Cross-selling spořicích produktů, identifikace spoření\n")
-
+print("=== HOUSING & CONSUMER LOANS ===\n")
 clm.print_summary()
+
+print("\n=== Seznam pravidel (seřazeno podle BASE) ===")
 
 # Seřazení podle BASE
 rules_data = []
 for i in range(1, len(clm.rulelist) + 1):
     quants = clm.get_quantifiers(i)
-    rules_data.append({'id': i, 'base': quants.get('base', 0),
-                       'conf': quants.get('conf', 0), 'aad': quants.get('aad', 0)})
+    rules_data.append({'id': i, 'base': quants.get('base', 0)})
 
 rules_sorted = sorted(rules_data, key=lambda x: x['base'], reverse=True)
 
-print("\n=== Seznam pravidel (seřazeno podle BASE) ===")
-print(f"{'RULEID':<7} {'BASE':<6} {'CONF':<6} {'AAD':<7} Rule")
-
+print(f"{'ID':<5} {'BASE':<6} Rule")
 for r in rules_sorted:
-    print(f"{r['id']:<7} {r['base']:<6} {r['conf']:<6.3f} {r['aad']:+<7.3f} {clm.get_ruletext(r['id'])}")
+    print(f"{r['id']:<5} {r['base']:<6} {clm.get_ruletext(r['id'])}")
 
-print("\n=== Jednotlivá pravidla ===")
-for r in rules_sorted:
+print("\n=== TOP 20 pravidel ===")
+for i, r in enumerate(rules_sorted[:20], 1):
     print(f"\n=== Rule {r['id']} (BASE={r['base']}) ===\n")
     clm.print_rule(r['id'])
 
 sys.stdout = sys.__stdout__
 
 # Uložení
-with open("saving_accounts_assoc_pepa.txt", "w", encoding="utf-8") as f:
+with open("uloha1_output.txt", "w", encoding="utf-8") as f:
     f.write(output.getvalue())
 
-print("✓ Analýza Saving Accounts dokončena: saving_accounts_assoc_pepa.txt")
+print("✓ Výstup uložen: uloha1_output.txt")

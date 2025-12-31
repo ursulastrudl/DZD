@@ -3,45 +3,29 @@ import sys
 import io
 from cleverminer import *
 
-# Načtení dat
 df = pd.read_csv('TimeDeposit_10K_clean.csv', sep=';')
-
-# Výběr pouze potřebných sloupců
-df = df[[
-    'Gender',
-    'Marital_Status',
-    'Occupation_Category',
-    'Saving_Current_Accounts_Flag',
-    'Investment_Products_Flag',
-    'Credit_Cards_Flag',
-    'Housing_Loans_Flag',
-    'Consumer_Loans_Flag',
-    'Insurance_Products_Flag'
-]]
-
-# CleverMiner analýza
 clm = cleverminer(
     df=df,
     proc='4ftMiner',
-    quantifiers={'Base': 250, 'aad': 1.2},
+    quantifiers={
+        'Base': 300,      
+        'aad': 0.75,       
+        'Lift': 1.02       
+    },
     ante={
         'attributes': [
-            {'name': 'Gender', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Age_Group', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
+            {'name': 'Income_Group', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
             {'name': 'Marital_Status', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Occupation_Category', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Saving_Current_Accounts_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Investment_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Credit_Cards_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Housing_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
-            {'name': 'Consumer_Loans_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
+            {'name': 'Gender', 'type': 'subset', 'minlen': 1, 'maxlen': 1},
         ],
-        'minlen': 2,
-        'maxlen': 4,
+        'minlen': 1,
+        'maxlen': 4,   
         'type': 'con'
     },
     succ={
         'attributes': [
-            {'name': 'Insurance_Products_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
+            {'name': 'Business_Flag', 'type': 'subset', 'minlen': 1, 'maxlen': 1}
         ],
         'minlen': 1,
         'maxlen': 1,
@@ -81,7 +65,7 @@ for i, r in enumerate(rules_sorted[:20], 1):
 sys.stdout = sys.__stdout__
 
 # Uložení
-with open("uloha2_output.txt", "w", encoding="utf-8") as f:
+with open("uloha3_output.txt", "w", encoding="utf-8") as f:
     f.write(output.getvalue())
 
-print("✓ Analýza Insurance dokončena: uloha2_output.txt")
+print("✓ Analýza Insurance dokončena: uloha3_output.txt")
