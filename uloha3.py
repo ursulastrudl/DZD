@@ -9,8 +9,7 @@ clm = cleverminer(
     proc='4ftMiner',
     quantifiers={
         'Base': 300,      
-        'aad': 0.75,       
-        'Lift': 1.02       
+        'aad': 0.75  
     },
     ante={
         'attributes': [
