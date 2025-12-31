@@ -131,7 +131,7 @@ for i, rule_info in enumerate(rules_data_sorted[:20], 1):
 
 sys.stdout = sys.__stdout__
 
-with open("investment_products_assoc_pepa.txt", "w", encoding="utf-8") as f:
+with open("uloha2_output.txt", "w", encoding="utf-8") as f:
     f.write(output1.getvalue())
 
-print("✓ Analýza Investment Products dokončena: investment_products_assoc_pepa.txt")
+print("✓ Analýza Investment Products dokončena: uloha2_output.txt")
